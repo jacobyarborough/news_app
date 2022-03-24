@@ -1,1 +1,19 @@
-<%= 'hello world' %>
+<h1>Welcome to the news app, your personalized news site!</h1>
+
+<%= form_with url: '/searches/results', method: :get, local: true do |f| %>
+  <%= "Choose country" %><br>
+  <%= f.select :country, [["UAE", "ae"], ["United States", "us"], ["United Kingdom","uk"]] %><br>
+  <%= f.submit "Filter Articles" %>
+<% end %>
+
+<h3>Here are the top stories for the day</h3>
+<% @top_stories.each do |article| %>
+  <%= link_to article.title, article.url %><br>
+  <% if article.image %>
+    <%= image_tag article.image %><br>
+  <% end %>
+  <%= article.source %><br>
+  <%= "by #{article.author}" %><br>
+  <%= article.date %><br>
+  <br>
+<% end %>
